@@ -41,7 +41,7 @@ module.exports = (env, options) => {
 		},
 		plugins: [
 			new MiniCssExtractPlugin({
-				filename: '[name].css',
+				filename: 'styles/[name].css',
 			}),
 			new IgnoreEmitPlugin(ignoreFiles)
 		],

@@ -5,7 +5,7 @@ let chalk;
 const source = path.join(__dirname, '..');
 const projectName = process.argv[2] ?? 'create-ts-app';
 const { program } = require('commander');
-const filesToExclude = ['installer', 'node_modules', '.git', '.idea', 'CHANGELOG.md', 'README.md'];
+const filesToExclude = ['installer', 'node_modules', '.git', '.idea', 'CHANGELOG.md'];
 const packageJson = require(path.join(source, 'package.json'));
 
 program.version(packageJson.version, '-v, --version', 'output the current version');
@@ -14,21 +14,28 @@ program.parse(process.argv);
 import('chalk').then(module => {
 	chalk = module.default;
 
-	console.log();
-	console.log(chalk.magenta('Executing @dannyxcii/create-ts-app installer'));
-	console.log();
-	console.log('Creating your new TypeScript app:', chalk.cyan(projectName));
-	console.log('Setting up project directory at', chalk.cyan(path.join(process.cwd(), projectName)));
+	printCommandStartupText(chalk);
 
-	copyFolderToSync(source, path.join(process.cwd(), projectName));
+	const projectPath = path.join(process.cwd(), projectName);
+
+	if (fs.existsSync(projectPath)) {
+		console.log();
+		console.log(
+			chalk.red('Error: Cannot create a new application'),
+			chalk.cyan(projectName),
+			chalk.red('- a folder with that name already exists (', chalk.cyan(projectPath), ')')
+		);
+
+		return;
+	}
+
+	copyFolderToSync(source, projectPath);
 	
 	console.log('Updating your apps', chalk.cyan('package.json'));
 
 	modifyPackageJson();
 
-	console.log();
-	console.log(chalk.greenBright('Success: Application Created'));
-	console.log(chalk.italic('Now run:', chalk.yellow(`cd ${projectName} && npm install && npm run dev`)));
+	printCommandSuccessText(chalk);
 });
 
 function copyFolderToSync(source, destination)
@@ -56,4 +63,20 @@ function modifyPackageJson()
 		path.join(process.cwd(), projectName, 'package.json'),
 		JSON.stringify(packageJson, null, 2)
 	);
+}
+
+function printCommandStartupText(chalk)
+{
+	console.log();
+	console.log(chalk.magenta('Executing @dannyxcii/create-ts-app installer'));
+	console.log();
+	console.log('Creating your new TypeScript app:', chalk.cyan(projectName));
+	console.log('Setting up project directory at', chalk.cyan(path.join(process.cwd(), projectName)));
+}
+
+function printCommandSuccessText(chalk)
+{
+	console.log();
+	console.log(chalk.greenBright('Success: Application Created'));
+	console.log(chalk.italic('Now run:', chalk.yellow(`cd ${projectName} && npm install && npm run dev`)));
 }
