@@ -1,5 +1,5 @@
 {
-  "name": "@dannycii/create-ts-app",
+  "name": "@dannyxcii/create-ts-app",
   "version": "1.0.0",
   "scripts": {
     "dev": "webpack --config webpack.config.js --mode=development",
