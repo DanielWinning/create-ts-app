@@ -6,7 +6,6 @@
 A TypeScript boilerplate project.
 
 #### Table of Contents
-- [Create TS App](#create-ts-app)
 - [Installation](#installation)
 - [Initial Setup](#initial-setup)
 - [Build Process](#build-process)
