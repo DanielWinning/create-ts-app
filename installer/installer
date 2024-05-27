@@ -4,7 +4,12 @@ const path = require('path');
 let chalk;
 const source = path.join(__dirname, '..');
 const projectName = process.argv[2] ?? 'create-ts-app';
-const filesToExclude = ['installer', 'node_modules', '.git'];
+const { program } = require('commander');
+const filesToExclude = ['installer', 'node_modules', '.git', '.idea', 'CHANGELOG.md', 'README.md'];
+const packageJson = require(path.join(source, 'package.json'));
+
+program.version(packageJson.version, '-v, --version', 'output the current version');
+program.parse(process.argv);
 
 import('chalk').then(module => {
 	chalk = module.default;
@@ -42,8 +47,6 @@ function copyFolderToSync(source, destination)
 
 function modifyPackageJson()
 {
-	const packageJson = require(path.join(source, 'package.json'));
-	
 	delete packageJson['bin'];
 	delete packageJson['dependencies'];
 	
