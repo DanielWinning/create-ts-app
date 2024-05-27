@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-let chalk;
 const source = path.join(__dirname, '..');
 const projectName = process.argv[2] ?? 'create-ts-app';
 const { program } = require('commander');
-const filesToExclude = ['installer', 'node_modules', '.git', '.idea', 'CHANGELOG.md'];
+const filesToExclude = ['installer', 'node_modules', '.git', '.idea', 'CHANGELOG.md', '.gitignore'];
 const packageJson = require(path.join(source, 'package.json'));
 
 program.version(packageJson.version, '-v, --version', 'output the current version');
 program.parse(process.argv);
+
+let chalk;
 
 import('chalk').then(module => {
 	chalk = module.default;
@@ -30,11 +31,8 @@ import('chalk').then(module => {
 	}
 
 	copyFolderToSync(source, projectPath);
-	
-	console.log('Updating your apps', chalk.cyan('package.json'));
-
-	modifyPackageJson();
-
+	modifyPackageJson(chalk);
+	createGitignoreFiles(projectPath);
 	printCommandSuccessText(chalk);
 });
 
@@ -43,7 +41,7 @@ function copyFolderToSync(source, destination)
 	fs.mkdirSync(destination, {recursive: true});
 	fs.readdirSync(source).forEach(element => {
 		if (filesToExclude.includes(element)) return;
-		
+
 		if (fs.lstatSync(path.join(source, element)).isFile()) {
 			fs.copyFileSync(path.join(source, element), path.join(destination, element));
 		} else {
@@ -52,12 +50,14 @@ function copyFolderToSync(source, destination)
 	});
 }
 
-function modifyPackageJson()
+function modifyPackageJson(chalk)
 {
+	console.log('Updating your apps', chalk.cyan('package.json'));
+
 	delete packageJson['bin'];
 	delete packageJson['dependencies'];
 	delete packageJson['devDependencies']['@dannyxcii/badger'];
-	
+
 	packageJson.name = projectName;
 
 	fs.writeFileSync(
@@ -80,4 +80,13 @@ function printCommandSuccessText(chalk)
 	console.log();
 	console.log(chalk.greenBright('Success: Application Created'));
 	console.log(chalk.italic('Now run:', chalk.yellow(`cd ${projectName} && npm install && npm run dev`)));
+}
+
+function createGitignoreFiles(destination)
+{
+	const baseGitignoreContent = "/.idea\n/node_modules";
+	const assetsGitignoreContent = "/*\n!.gitignore";
+
+	fs.writeFileSync(path.join(destination, '.gitignore'), baseGitignoreContent.trim());
+	fs.writeFileSync(path.join(destination, 'public/assets', '.gitignore'), assetsGitignoreContent.trim());
 }

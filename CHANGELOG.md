@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.2.2] - 2024-05-27
+### Added
+- N/A
+
+### Changed
+- N/A
+
+### Deprecated
+- N/A
+
+### Removed
+- N/A
+
+### Fixed
+- Ensure `.gitignore` is correctly created in project directory
+
+### Security
+- N/A
+
+---
+
 ## [1.2.1] - 2024-05-27
 ### Added
 - N/A
