@@ -6,6 +6,9 @@
     "build": "webpack --config webpack.config.js --mode=production",
     "watch": "webpack --config webpack.config.js --mode=development --watch"
   },
+  "bin": {
+    "create-ts-app": "installer/installer"
+  },
   "devDependencies": {
     "css-loader": "^7.1.2",
     "css-minimizer-webpack-plugin": "^7.0.0",
