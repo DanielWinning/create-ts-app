@@ -2,9 +2,9 @@
 const fs = require('fs');
 const path = require('path');
 const source = path.join(__dirname, '..');
-const packageName = process.argv[2] ?? 'create-ts-app';
+const projectName = process.argv[2] ?? 'create-ts-app';
 
-const filesToExclude = ['installer', 'installer.js'];
+const filesToExclude = ['installer', 'node_modules', '.git'];
 
 function copyFolderToSync(source, destination)
 {
@@ -26,13 +26,15 @@ function modifyPackageJson()
 	
 	delete packageJson['bin'];
 	
-	packageJson.name = packageName;
+	packageJson.name = projectName;
 	
+	console.log(packageJson);
+
 	fs.writeFileSync(
-		path.join(__dirname, 'package.json'),
+		path.join(process.cwd(), projectName, 'package.json'),
 		JSON.stringify(packageJson, null, 2)
 	);
 }
 
+copyFolderToSync(source, path.join(process.cwd(), projectName));
 modifyPackageJson();
-copyFolderToSync(source, path.join(process.cwd(), packageName));
