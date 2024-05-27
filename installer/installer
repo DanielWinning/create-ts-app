@@ -45,6 +45,7 @@ function modifyPackageJson()
 	const packageJson = require(path.join(source, 'package.json'));
 	
 	delete packageJson['bin'];
+	delete packageJson['dependencies'];
 	
 	packageJson.name = projectName;
 
