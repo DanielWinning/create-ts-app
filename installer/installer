@@ -1,10 +1,30 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+let chalk;
 const source = path.join(__dirname, '..');
 const projectName = process.argv[2] ?? 'create-ts-app';
-
 const filesToExclude = ['installer', 'node_modules', '.git'];
+
+import('chalk').then(module => {
+	chalk = module.default;
+
+	console.log();
+	console.log(chalk.magenta('Executing @dannyxcii/create-ts-app installer'));
+	console.log();
+	console.log('Creating your new TypeScript app:', chalk.cyan(projectName));
+	console.log('Setting up project directory at', chalk.cyan(path.join(process.cwd(), projectName)));
+
+	copyFolderToSync(source, path.join(process.cwd(), projectName));
+	
+	console.log('Updating your apps', chalk.cyan('package.json'));
+
+	modifyPackageJson();
+
+	console.log();
+	console.log(chalk.greenBright('Success: Application Created'));
+	console.log(chalk.italic('Now run:', chalk.yellow(`cd ${projectName} && npm run dev`)));
+});
 
 function copyFolderToSync(source, destination)
 {
@@ -27,14 +47,9 @@ function modifyPackageJson()
 	delete packageJson['bin'];
 	
 	packageJson.name = projectName;
-	
-	console.log(packageJson);
 
 	fs.writeFileSync(
 		path.join(process.cwd(), projectName, 'package.json'),
 		JSON.stringify(packageJson, null, 2)
 	);
 }
-
-copyFolderToSync(source, path.join(process.cwd(), projectName));
-modifyPackageJson();
