@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.2.1] - 2024-05-27
+### Added
+- N/A
+
+### Changed
+- Updated documentation in `README.md`
+
+### Deprecated
+- N/A
+
+### Removed
+- Remove dev dependency for `@dannyxcii/badger` from created project
+
+### Fixed
+- N/A
+
+### Security
+- N/A
+
+---
+
 ## [1.2.0] - 2024-05-27
 ### Added
 - Add `README.md` to created project

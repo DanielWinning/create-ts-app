@@ -56,6 +56,7 @@ function modifyPackageJson()
 {
 	delete packageJson['bin'];
 	delete packageJson['dependencies'];
+	delete packageJson['devDependencies']['@dannyxcii/badger'];
 	
 	packageJson.name = projectName;
 

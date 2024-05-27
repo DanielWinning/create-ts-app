@@ -1,9 +1,17 @@
 # Create TS App
 
 <!-- Version Badge -->
-<img src="https://img.shields.io/badge/Version-1.2.0-blue" alt="Version 1.2.0">
+<img src="https://img.shields.io/badge/Version-1.2.1-blue" alt="Version 1.2.1">
 
 A TypeScript boilerplate project.
+
+#### Table of Contents
+- [Create TS App](#create-ts-app)
+- [Installation](#installation)
+- [Initial Setup](#initial-setup)
+- [Build Process](#build-process)
+- [Build Commands](#build-commands)
+- [Output](#output)
 
 ## Installation
 
@@ -11,12 +19,10 @@ A TypeScript boilerplate project.
 npx @dannyxcii/create-ts-app my-ts-app
 ```
 
-This will install `@dannyxcii/create-ts-app` globally and create a new boilerplate
-application called `my-ts-app` in your current working directory.
+This will create a new boilerplate application called `my-ts-app` in your current
+working directory.
 
-## Usage
-
-### Initial Setup
+## Initial Setup
 
 After running the installer, enter your project and run `npm install`:
 
@@ -27,7 +33,7 @@ cd my-ts-app && npm install
 This installs required development dependencies, such as `webpack`, `typescript`
 and `sass`.
 
-### Build Process
+## Build Process
 
 Your app includes a default webpack setup to compile JavaScript, TypeScript, CSS and SCSS files
 from your projects `src` directory to `public/assets`.
@@ -46,7 +52,7 @@ const entries = {
 > stylesheets via scripts in your other entrypoints you can remove the `IgnoreEmitPlugin` entry
 > from the plugins array
 
-### Build Commands
+## Build Commands
 
 Included are three built-in build commands:
 
@@ -65,7 +71,7 @@ reducing their filesize.
 Finally, the `watch` command can be used during development to watch your `src` files for changes and compile
 them on save, reducing the need to repeatedly run build commands.
 
-### Output
+## Output
 
 The `webpack` build process will output the following files when a build command is ran:
 
@@ -76,7 +82,7 @@ public/assets/styles/styles.css
 
 To change the output directory for your JavaScript files, you can modify the `output` property:
 
-```javascript
+```txt
 // webpack.config.js
 output: {
 	filename: '[name].js',
@@ -93,26 +99,3 @@ new MiniCssExtractPlugin({
 	filename: 'styles/[name].css',
 })
 ```
-
-### Other Commands
-
-#### Check Version
-
-To check the currently installed version, you can run one of the following commands:
-
-```shell
-npx @dannyxcii/create-ts-app -v
-npx @dannyxcii/create-ts-app --version
-```
-
-> Note: the version command is available from version 1.1.0
-
-#### Updating
-
-To update to the latest version, run:
-
-```shell
-npm install -g @dannyxcii/create-ts-app
-```
-
-> Note: you may need administrative privileges to run the above command
