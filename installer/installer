@@ -55,6 +55,7 @@ function modifyPackageJson(chalk)
     console.log('Updating your apps', chalk.cyan('package.json'));
 
     delete packageJson['bin'];
+    delete packageJson['version'];
     delete packageJson['dependencies'];
     delete packageJson['devDependencies']['@dannyxcii/badger'];
 
