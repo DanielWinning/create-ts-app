@@ -42,8 +42,8 @@ Two entrypoints are included, and can be found in `webpack.config.js`:
 ```app
 // webpack.config.js
 const entries = {
-	app: './src/app.ts',
-	styles: './src/styles/app.scss'
+    app: './src/app.ts',
+    styles: './src/styles/app.scss'
 }
 ```
 
@@ -84,8 +84,8 @@ To change the output directory for your JavaScript files, you can modify the `ou
 ```txt
 // webpack.config.js
 output: {
-	filename: '[name].js',
-	path: path.resolve(__dirname, 'public/assets/')
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'public/assets/')
 }
 ```
 
@@ -95,6 +95,6 @@ To change the output directory for your stylesheets you can modify the path pass
 ```javascript
 // webpack.config.js
 new MiniCssExtractPlugin({
-	filename: 'styles/[name].css',
+    filename: 'styles/[name].css',
 })
 ```
