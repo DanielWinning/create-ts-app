@@ -1,7 +1,7 @@
 # Create TS App
 
 <!-- Version Badge -->
-<img src="https://img.shields.io/badge/Version-1.2.2-blue" alt="Version 1.2.2">
+<img src="https://img.shields.io/badge/Version-1.3.0-blue" alt="Version 1.3.0">
 
 A TypeScript boilerplate project.
 
@@ -15,7 +15,7 @@ A TypeScript boilerplate project.
 ## Installation
 
 ```shell
-npx @dannyxcii/create-ts-app my-ts-app
+npx @dannyxcii/create-ts-app@latest my-ts-app
 ```
 
 This will create a new boilerplate application called `my-ts-app` in your current
